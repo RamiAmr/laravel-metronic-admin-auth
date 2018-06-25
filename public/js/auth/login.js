@@ -88,13 +88,47 @@ var SnippetLogin = function () {
             btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
 
             form.ajaxSubmit({
-                url: '',
+                url: form.attr('action'),
+                type: form.attr('method'),
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (response, status, xhr, $form) {
-                    // similate 2s delay
-                    setTimeout(function () {
-                        btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
-                        showErrorMsg(form, 'danger', 'Incorrect username or password. Please try again.');
-                    }, 2000);
+                    console.log(response);
+                    console.log(status);
+                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                    switch (response.status_code) {
+                        case 200:
+                            //every thing is okk, redirect to dashboard
+                            window.location.href = response.target;
+                            break;
+                        case 400:
+                            //something wrong happened at server side, show the error
+
+                            var errors = response.errors;
+                            var messages = "";
+                            for (var key in errors) {
+                                messages += errors[key];
+                            }
+                            showErrorMsg(form, 'danger', messages);
+                            break;
+                        default:
+                            //An unknown status_code, do nothing for now
+                            //TODO find what to do with this status_code
+                            break;
+                    }
+                },
+                error: function (response, status) {
+                    console.log(response);
+                    console.log(status);
+
+                    //For a response that is not from php code
+                    //ex. cannot connect to server, or unhandled exceptions
+                    //TODO maybe redirect to 500 page
+
+                    btn.removeClass('m-loader m-loader--right m-loader--light').attr('disabled', false);
+                    showErrorMsg(form, 'danger', 'Something Went Wrong!');
                 }
             });
         });

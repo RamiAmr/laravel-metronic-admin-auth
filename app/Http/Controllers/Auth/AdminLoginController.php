@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class AdminLoginController extends Controller
 {
@@ -18,19 +20,53 @@ class AdminLoginController extends Controller
         return view('auth.admin-login');
     }
 
+
+    public function login2(Request $request)
+    {
+
+        try {
+            User::logIn($request->get("email"), $request->get("password"));
+
+            return response()->json(['status_code' => 200], 200);
+        } catch (ParseException $e) {
+            return response()->json(['errors' => $e->getMessage(), "status_code" => 400], 200);
+        } catch (\Exception $e) {
+            return response()->json(['errors' => $e->getMessage(), "status_code" => 400], 200);
+        }
+    }
+
     public function login(Request $request)
     {
         // Validate the form data
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|min:6'
         ]);
-        // Attempt to log the user in
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            // if successful, then redirect to their intended location
-            return redirect()->intended(route('admin.dashboard'));
+
+
+        if ($validator->fails()) {
+            return response()->json(["errors" => $validator->messages(), "status_code" => 400], 200);
         }
-        // if unsuccessful, then redirect back to the login with the form data
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        try {
+
+            $url = Redirect::back();
+
+            // Attempt to log the user in
+            if (Auth::guard('admin')->attempt(['email' => $request->get("email"), 'password' => $request->get("password")], $request->get("remember"))) {
+                // if successful, then redirect to their intended location
+                //return redirect()->intended(route('admin.dashboard'));
+                $url = Redirect::intended(route('admin.dashboard'))->getTargetUrl();
+
+                return response()->json(['status_code' => 200, 'target' => $url], 200);
+            }
+            // if unsuccessful, then redirect back to the login with the form data
+            //return redirect()->back()->withInput($request->only('email', 'remember'));
+
+            return response()->json(['status_code' => 200, 'target' => $url], 200);
+
+
+        } catch (\Exception $e) {
+            return response()->json(['errors' => $e->getMessage(), "status_code" => 400], 200);
+        }
     }
 }

@@ -45,7 +45,7 @@ License: You must have a valid license purchased only from themeforest(the above
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
-            },i[r].l = 1 * new Date();
+            }, i[r].l = 1 * new Date();
             a = s.createElement(o),
                 m = s.getElementsByTagName(o)[0];
             a.async = 1;
@@ -89,7 +89,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
                             </div>
 
-                            <form class="m-login__form m-form" action="">
+                            <form class="m-login__form m-form" action="{{route('admin.login.submit')}}" method="post">
+                                @csrf
                                 <div class="form-group m-form__group">
                                     <input class="form-control m-input" type="text" placeholder="Email" name="email"
                                            autocomplete="off">
@@ -106,7 +107,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </label>
                                     </div>
                                     <div class="col m--align-right">
-                                        <a href="javascript:;" id="m_login_forget_password" class="m-link">Forget
+                                        <a href="javascript:" id="m_login_forget_password" class="m-link">Forget
                                             Password ?</a>
                                     </div>
                                 </div>
@@ -191,7 +192,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<span class="m-login__account-msg">
 						Don't have an account yet ?
 						</span>&nbsp;&nbsp;
-                        <a href="javascript:;" id="m_login_signup" class="m-link m-link--focus m-login__account-link">Sign
+                        <a href="javascript:" id="m_login_signup" class="m-link m-link--focus m-login__account-link">Sign
                             Up</a>
                     </div>
 

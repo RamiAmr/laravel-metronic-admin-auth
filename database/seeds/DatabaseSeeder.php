@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         //DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
         DB::table('admins')->truncate();
-
+        $this->call(AdminsTableSeeder::class);
 
         //TODO populate default admin
         ///factory(App\User::class, 10)->create();
