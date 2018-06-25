@@ -3960,7 +3960,7 @@ Embodies a div that has potential scrollbars
                     return {}; // subclasses must implement
                 };
                 View.prototype.applyDateScroll = function (scroll) {
-         // subclasses must implement
+                    // subclasses must implement
                 };
                 /* Event Drag-n-Drop
     ------------------------------------------------------------------------------------------------------------------*/

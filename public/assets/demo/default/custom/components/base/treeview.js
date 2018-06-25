@@ -59,31 +59,36 @@ var Treeview = function () {
                 },
                 'data': [{
                     "text": "Same but with checkboxes",
-                    "children": [{
-                        "text": "initially selected",
-                        "state": {
-                            "selected": true
-                        }
-                    }, {
-                        "text": "custom icon",
-                        "icon": "fa fa-warning m--font-danger"
-                    }, {
-                        "text": "initially open",
-                        "icon": "fa fa-folder m--font-default",
-                        "state": {
-                            "opened": true
+                    "children": [
+                        {
+                            "text": "initially selected",
+                            "state": {
+                                "selected": true
+                            }
                         },
-                        "children": ["Another node"]
-                    }, {
-                        "text": "custom icon",
-                        "icon": "fa fa-warning m--font-waring"
-                    }, {
-                        "text": "disabled node",
-                        "icon": "fa fa-check m--font-success",
-                        "state": {
-                            "disabled": true
-                        }
-                    }]
+                        {
+                            "text": "custom icon",
+                            "icon": "fa fa-warning m--font-danger"
+                        },
+                        {
+                            "text": "initially open",
+                            "icon": "fa fa-folder m--font-default",
+                            "state": {
+                                "opened": true
+                            },
+                            "children": ["Another node"]
+                        },
+                        {
+                            "text": "custom icon",
+                            "icon": "fa fa-warning m--font-waring"
+                        },
+                        {
+                            "text": "disabled node",
+                            "icon": "fa fa-check m--font-success",
+                            "state": {
+                                "disabled": true
+                            }
+                        }]
                 },
                     "And wholerow selection"
                 ]

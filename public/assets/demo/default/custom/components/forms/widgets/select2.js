@@ -162,6 +162,7 @@ var Select2 = function () {
             // multi select
             $('#m_select2_3_modal').select2({
                 placeholder: "Select a state",
+                maximumSelectionLength: 1
             });
 
             // basic
