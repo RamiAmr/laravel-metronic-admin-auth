@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Admin::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
@@ -21,3 +21,10 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+/*$factory->define(App\Post::class, function (Faker $faker) {
+    return [
+        'user_id' => rand(0, 10),
+        'title' => $faker->sentence(1,true),
+        'body' => $faker->sentence(10, true),
+    ];
+});*/
