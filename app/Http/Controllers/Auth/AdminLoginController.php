@@ -69,4 +69,19 @@ class AdminLoginController extends Controller
             return response()->json(['errors' => $e->getMessage(), "status_code" => 400], 200);
         }
     }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+        return redirect()->route('admin.login');
+    }
+
 }

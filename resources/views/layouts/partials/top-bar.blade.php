@@ -456,7 +456,7 @@
                                 <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
                                 <div class="m-dropdown__inner">
                                     <div class="m-dropdown__header m--align-center"
-                                         style="background: url(./assets/app/media/img/misc/notification_bg.jpg); background-size: cover;">
+                                         style="background: url({{asset('assets/app/media/img/misc/notification_bg.jpg')}}); background-size: cover;">
                                         <span class="m-dropdown__header-title">9 New</span>
                                         <span class="m-dropdown__header-subtitle">User Notifications</span>
                                     </div>
@@ -603,7 +603,7 @@
                                 <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
                                 <div class="m-dropdown__inner">
                                     <div class="m-dropdown__header m--align-center"
-                                         style="background: url(./assets/app/media/img/misc/quick_actions_bg.jpg); background-size: cover;">
+                                         style="background: url({{asset('assets/app/media/img/misc/quick_actions_bg.jpg')}}); background-size: cover;">
                                         <span class="m-dropdown__header-title">Quick Actions</span>
                                         <span class="m-dropdown__header-subtitle">Shortcuts</span>
                                     </div>
@@ -642,7 +642,7 @@
                             data-dropdown-toggle="click">
                             <a href="#" class="m-nav__link m-dropdown__toggle">
 	<span class="m-topbar__userpic">
-		<img src="./assets/app/media/img/users/user4.jpg" class="m--img-rounded m--marginless" alt=""/>
+		<img src="{{asset("assets/app/media/img/users/user4.jpg")}}" class="m--img-rounded m--marginless" alt=""/>
         <!--
         <span class="m-type m--bg-brand"><span class="m--font-light">S<span><span>
         -->
@@ -653,18 +653,19 @@
                                 <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
                                 <div class="m-dropdown__inner">
                                     <div class="m-dropdown__header m--align-center"
-                                         style="background: url(./assets/app/media/img/misc/user_profile_bg.jpg); background-size: cover;">
+                                         style="background: url({{asset('assets/app/media/img/misc/user_profile_bg.jpg')}}); background-size: cover;">
                                         <div class="m-card-user m-card-user--skin-dark">
                                             <div class="m-card-user__pic">
-                                                <img src="./assets/app/media/img/users/user4.jpg"
+                                                <img src="{{asset('assets/app/media/img/users/user4.jpg')}}"
                                                      class="m--img-rounded m--marginless" alt=""/>
                                                 <!--
                                                 <span class="m-type m-type--lg m--bg-danger"><span class="m--font-light">S<span><span>
                                                 -->
                                             </div>
                                             <div class="m-card-user__details">
-                                                <span class="m-card-user__name m--font-weight-500">Mark Andre</span>
-                                                <a href="" class="m-card-user__email m--font-weight-300 m-link">mark.andre@gmail.com</a>
+                                                <span class="m-card-user__name m--font-weight-500">{{Auth::guard('admin')->user()->name}}</span>
+                                                <a href=""
+                                                   class="m-card-user__email m--font-weight-300 m-link">{{Auth::guard('admin')->user()->email}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -714,7 +715,7 @@
                                                 <li class="m-nav__separator m-nav__separator--fit">
                                                 </li>
                                                 <li class="m-nav__item">
-                                                    <a href="?page=snippets/pages/user/login-1&demo=default"
+                                                    <a href="{{route('admin.logout')}}"
                                                        class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Logout</a>
                                                 </li>
                                             </ul>
